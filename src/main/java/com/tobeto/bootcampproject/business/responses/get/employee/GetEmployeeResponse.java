@@ -1,4 +1,4 @@
-package com.tobeto.bootcampproject.business.responses.create.employee;
+package com.tobeto.bootcampproject.business.responses.get.employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,8 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateEmployeeResponse {
-    private int id;
+public class GetEmployeeResponse {
     private String userName;
     private String firstName;
     private String lastName;
