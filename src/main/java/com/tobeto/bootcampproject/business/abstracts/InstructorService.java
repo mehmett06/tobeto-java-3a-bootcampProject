@@ -4,11 +4,12 @@ import com.tobeto.bootcampproject.business.request.create.ınstructor.CreateInst
 import com.tobeto.bootcampproject.business.responses.create.ınstructor.CreateInstructorResponse;
 import com.tobeto.bootcampproject.business.responses.get.ınstructor.GetAllnstructorResponse;
 import com.tobeto.bootcampproject.business.responses.get.ınstructor.GetInstructorResponse;
+import com.tobeto.bootcampproject.core.utilities.results.DataResults;
 
 import java.util.List;
 
 public interface InstructorService {
-    CreateInstructorResponse create(CreateInstructorRequest createInstructorRequest);
-    GetInstructorResponse get(int id);
-    List<GetAllnstructorResponse> getall();
+    DataResults<CreateInstructorResponse> create(CreateInstructorRequest createInstructorRequest);
+    DataResults<GetInstructorResponse> get(int id);
+    DataResults<List<GetAllnstructorResponse>> getall();
 }

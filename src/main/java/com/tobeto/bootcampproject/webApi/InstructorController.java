@@ -6,6 +6,7 @@ import com.tobeto.bootcampproject.business.responses.create.ınstructor.CreateIn
 import com.tobeto.bootcampproject.business.responses.get.ınstructor.GetAllnstructorResponse;
 import com.tobeto.bootcampproject.business.responses.get.ınstructor.GetInstructorResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +19,28 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/instructor")
 @AllArgsConstructor
-public class InstructorController {
+public class InstructorController extends BaseController{
     private InstructorService instructorService;
 
     @PostMapping
+    public ResponseEntity<?>create (@RequestBody CreateInstructorRequest createInstructorRequest) {
+        return handleDataResult(instructorService.create(createInstructorRequest));
+    }
+    @GetMapping(value="/{id}")
+    public ResponseEntity<?>getById (@PathVariable int id){
+        return handleDataResult(instructorService.get(id));
+    }
+    @GetMapping(value="/getall")
+    public ResponseEntity<?>getAll(){
+        return handleDataResult(instructorService.getall());
+    }
+
+
+
+
+
+
+    /*
     public CreateInstructorResponse create(
             @RequestBody CreateInstructorRequest createInstructorRequest
     ) {
@@ -39,5 +58,5 @@ public class InstructorController {
     public List<GetAllnstructorResponse> getAll(
     ) {
         return instructorService.getall();
-    }
+    }*/
 }

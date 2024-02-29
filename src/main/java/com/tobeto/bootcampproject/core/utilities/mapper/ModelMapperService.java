@@ -1,4 +1,4 @@
-package com.tobeto.bootcampproject.core.mapper;
+package com.tobeto.bootcampproject.core.utilities.mapper;
 
 import org.modelmapper.ModelMapper;
 

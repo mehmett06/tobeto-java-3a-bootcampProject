@@ -18,4 +18,5 @@ public class GetApplicantResponse {
     private String email;
     private String password;
     private String about;
+    private LocalDateTime createdTime;
 }

@@ -4,11 +4,12 @@ import com.tobeto.bootcampproject.business.request.create.applicant.CreateApplic
 import com.tobeto.bootcampproject.business.responses.create.applicant.CreateApplicantResponse;
 import com.tobeto.bootcampproject.business.responses.get.applicant.GetAllAppllicantResponse;
 import com.tobeto.bootcampproject.business.responses.get.applicant.GetApplicantResponse;
+import com.tobeto.bootcampproject.core.utilities.results.DataResults;
 
 import java.util.List;
 
 public interface ApplicantService {
-CreateApplicantResponse create(CreateApplicantRequest createApplicantRequest);
-GetApplicantResponse getById(int id);
-List<GetAllAppllicantResponse> getAll();
+DataResults<CreateApplicantResponse> create(CreateApplicantRequest createApplicantRequest);
+DataResults<GetApplicantResponse> getById(int id);
+DataResults<List<GetAllAppllicantResponse>> getAll();
 }

@@ -18,4 +18,5 @@ public class GetAllnstructorResponse {
     private String email;
     private String password;
     private String companyName;
+    private LocalDateTime createdTime;
 }

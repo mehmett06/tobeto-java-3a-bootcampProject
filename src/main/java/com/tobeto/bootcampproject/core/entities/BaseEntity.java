@@ -22,7 +22,7 @@ public class BaseEntity<T> {
     @Column(name="USER_ID")
     private T id;
     @Column(name="CREATED")
-    private LocalDateTime created;
+    private LocalDateTime createdTime;
     @Column(name="UPDATE")
     private LocalDateTime update;
     @Column(name="DELETE")

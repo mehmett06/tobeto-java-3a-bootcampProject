@@ -12,6 +12,7 @@ public class CreateApplicantRequest {
     private String userName;
     private String firstName;
     private String lastName;
+    private LocalDateTime created;
     private LocalDateTime dateOfBirth;
     private String nationalIdentity;
     private String email;

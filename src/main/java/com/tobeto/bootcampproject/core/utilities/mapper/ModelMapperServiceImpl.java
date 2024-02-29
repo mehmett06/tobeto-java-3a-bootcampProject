@@ -1,9 +1,8 @@
-package com.tobeto.bootcampproject.core.mapper;
+package com.tobeto.bootcampproject.core.utilities.mapper;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.stereotype.Service;
 
 @Service
