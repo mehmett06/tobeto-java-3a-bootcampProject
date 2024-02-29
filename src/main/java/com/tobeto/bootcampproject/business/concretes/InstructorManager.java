@@ -28,7 +28,7 @@ public class InstructorManager implements InstructorService {
     public DataResults<CreateInstructorResponse> create(CreateInstructorRequest createInstructorRequest) {
         Instructor instructorToBeSave = modelMapperService.forRequest()
                 .map(createInstructorRequest, Instructor.class);
-        instructorToBeSave.setCreatedTime(LocalDateTime.now());
+        instructorToBeSave.setCreatedDate(LocalDateTime.now());
         instructorRepository.save(instructorToBeSave);
 
         CreateInstructorResponse response = modelMapperService.forResponse()

@@ -29,7 +29,7 @@ public class ApplicantManager implements ApplicantService {
     public DataResults<CreateApplicantResponse> create(CreateApplicantRequest createApplicantRequest) {
         Applicant applicantToCreate = modelMapperService.forRequest()
                 .map(createApplicantRequest, Applicant.class);
-        applicantToCreate.setCreatedTime(LocalDateTime.now());
+        applicantToCreate.setCreatedDate(LocalDateTime.now());
 
         applicantRepository.save(applicantToCreate);
 

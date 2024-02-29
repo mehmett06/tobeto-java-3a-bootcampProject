@@ -1,4 +1,4 @@
-package com.tobeto.bootcampproject.business.responses.create.applicant;
+package com.tobeto.bootcampproject.business.responses.get.ınstructor;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateApplicantResponse {
-    private int id;
-    private String firstName;
-    private String lastName;
+public class GetInstructorResponse {
     private String userName;
-    private String about;
     private LocalDateTime createdDate;
 }

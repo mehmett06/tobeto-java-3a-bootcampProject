@@ -18,5 +18,5 @@ public class GetAllEmployeeResponse {
     private String email;
     private String password;
     private String position;
-    private LocalDateTime createdTime;
+    private LocalDateTime createdDate;
 }

@@ -27,7 +27,7 @@ public class EmployeeManager implements EmployeeService {
     public DataResults<CreateEmployeeResponse> create(CreateEmployeeRequest createEmployeeRequest) {
         Employee employeeToCreate = modelMapperService.forRequest()
                 .map(createEmployeeRequest, Employee.class);
-        employeeToCreate.setCreatedTime(LocalDateTime.now());
+        employeeToCreate.setCreatedDate(LocalDateTime.now());
 
         employeeRepository.save(employeeToCreate);
         CreateEmployeeResponse response = modelMapperService.forResponse()

@@ -15,6 +15,6 @@ public class CreateInstructorResponse {
     private String lastName;
     private String userName;
     private String companyName;
-    private LocalDateTime createdTime;
+    private LocalDateTime createdDate;
 
 }

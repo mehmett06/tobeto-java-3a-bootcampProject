@@ -22,10 +22,10 @@ public class BaseEntity<T> {
     @Column(name="USER_ID")
     private T id;
     @Column(name="CREATED")
-    private LocalDateTime createdTime;
+    private LocalDateTime createdDate;
     @Column(name="UPDATE")
-    private LocalDateTime update;
+    private LocalDateTime updateDate;
     @Column(name="DELETE")
-    private LocalDateTime delete;
+    private LocalDateTime deleteDate;
 
 }
