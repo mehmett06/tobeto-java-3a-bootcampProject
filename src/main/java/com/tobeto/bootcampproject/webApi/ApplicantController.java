@@ -2,11 +2,13 @@ package com.tobeto.bootcampproject.webApi;
 
 import com.tobeto.bootcampproject.business.abstracts.ApplicantService;
 import com.tobeto.bootcampproject.business.request.create.applicant.CreateApplicantRequest;
+import com.tobeto.bootcampproject.business.request.update.ApplicantUpdateRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,5 +35,14 @@ public class ApplicantController extends BaseController{
     {
         return handleDataResult(applicantService.getAll());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?>getUpdate(
+            @PathVariable int id,
+            @RequestBody ApplicantUpdateRequest request
+    ){
+        return handleDataResult(applicantService.updateRequest(request,id));
+    }
+
 
 }

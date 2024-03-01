@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetAllEmployeeResponse {
+    private String id;
     private String userName;
     private String firstName;
     private String lastName;

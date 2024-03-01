@@ -1,4 +1,4 @@
-package com.tobeto.bootcampproject.business.responses.get.applicant;
+package com.tobeto.bootcampproject.business.request.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
+
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-public class GetAllAppllicantResponse {
-    private String id;
+public class EmployeeUpdateRequest {
     private String userName;
     private String firstName;
     private String lastName;
@@ -18,6 +18,5 @@ public class GetAllAppllicantResponse {
     private String nationalIdentity;
     private String email;
     private String password;
-    private String about;
-    private LocalDateTime createdDate;
+    private String position;
 }
