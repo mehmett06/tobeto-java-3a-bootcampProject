@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateApplicationRequest {
-    private Applicant applicant;
-    private Bootcamp bootcamp;
-    private ApplicationState applicationState;
+    private int applicantId;
+    private int bootcampId;
+    private int applicationStateId;
 }

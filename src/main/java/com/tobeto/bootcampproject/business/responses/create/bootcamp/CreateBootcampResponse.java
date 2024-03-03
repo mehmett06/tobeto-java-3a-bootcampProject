@@ -1,6 +1,5 @@
-package com.tobeto.bootcampproject.business.request.create.bootcamp;
+package com.tobeto.bootcampproject.business.responses.create.bootcamp;
 
-import com.tobeto.bootcampproject.model.entities.Instructor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +9,11 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateBootcampRequest {
+public class CreateBootcampResponse {
+
     private String name;
-    private Instructor instructorId;
+    private int instructorId;
     private LocalDateTime startDate;
-    private  LocalDateTime endDate;
+    private LocalDateTime endDate;
     private int bootcampStateId;
 }
