@@ -9,12 +9,9 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import java.time.LocalDate;
-@Getter
-@Setter
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -22,6 +19,7 @@ import java.time.LocalDate;
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
 @Table(name="USERS")
+
 public class User extends BaseEntity<Integer> {
 
     @Column(name = "USER_NAME")

@@ -99,6 +99,6 @@ public class ApplicantManager implements ApplicantService {
     @Override
     public Result deleteApplicantBy(int id) {
         applicantRepository.deleteById(id);
-       return new SuccessResult("Applicant Deleted");
+       return new SuccessResult("Applicant Delete");
     }
 }

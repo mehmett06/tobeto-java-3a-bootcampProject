@@ -7,6 +7,7 @@ import com.tobeto.bootcampproject.business.responses.get.employee.GetAllEmployee
 import com.tobeto.bootcampproject.business.responses.get.employee.GetEmployeeResponse;
 import com.tobeto.bootcampproject.business.responses.update.EmployeeUpdateResponse;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
+import com.tobeto.bootcampproject.core.utilities.results.Result;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ DataResults<CreateEmployeeResponse> create(CreateEmployeeRequest createEmployeeR
 DataResults<GetEmployeeResponse> getById(int id);
 DataResults<List<GetAllEmployeeResponse>> getAll();
 DataResults<EmployeeUpdateResponse> update(EmployeeUpdateRequest employeeUpdateRequest,int id);
+Result deleteEmployeeBy(int id);
 }

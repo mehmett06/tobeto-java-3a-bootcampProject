@@ -3,10 +3,9 @@ package com.tobeto.bootcampproject.webApi;
 import com.tobeto.bootcampproject.business.abstracts.EmployeeService;
 import com.tobeto.bootcampproject.business.request.create.employee.CreateEmployeeRequest;
 import com.tobeto.bootcampproject.business.request.update.EmployeeUpdateRequest;
-import com.tobeto.bootcampproject.business.responses.get.employee.GetAllEmployeeResponse;
-import com.tobeto.bootcampproject.business.responses.get.employee.GetEmployeeResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/employees")
@@ -49,4 +48,10 @@ public class EmployeeController extends BaseController{
         return handleDataResult(employeeService.update(request,id));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?>delete(
+            @PathVariable int id
+    ){
+        return handleResult(employeeService.deleteEmployeeBy(id));
+    }
 }

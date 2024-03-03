@@ -7,6 +7,7 @@ import com.tobeto.bootcampproject.business.responses.get.ınstructor.GetAllnstru
 import com.tobeto.bootcampproject.business.responses.get.ınstructor.GetInstructorResponse;
 import com.tobeto.bootcampproject.business.responses.update.InstructorUpdateResponse;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
+import com.tobeto.bootcampproject.core.utilities.results.Result;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface InstructorService {
     DataResults<GetInstructorResponse> get(int id);
     DataResults<List<GetAllnstructorResponse>> getall();
     DataResults<InstructorUpdateResponse>update(InstructorUpdateRequest instructorUpdateRequest,int id);
+    Result deleteInstructorBy(int id);
 }

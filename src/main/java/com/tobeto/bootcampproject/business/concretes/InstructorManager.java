@@ -10,8 +10,11 @@ import com.tobeto.bootcampproject.business.responses.get.ınstructor.GetInstruct
 import com.tobeto.bootcampproject.business.responses.update.InstructorUpdateResponse;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
+import com.tobeto.bootcampproject.core.utilities.results.Result;
 import com.tobeto.bootcampproject.core.utilities.results.Success.SuccessDataResult;
+import com.tobeto.bootcampproject.core.utilities.results.Success.SuccessResult;
 import com.tobeto.bootcampproject.model.entities.Instructor;
+import com.tobeto.bootcampproject.repository.EmployeeRepository;
 import com.tobeto.bootcampproject.repository.InstructorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,7 @@ import java.util.stream.Collectors;
 public class InstructorManager implements InstructorService {
     private InstructorRepository instructorRepository;
     private ModelMapperService modelMapperService;
+    private final EmployeeRepository employeeRepository;
 
     @Override
     public DataResults<CreateInstructorResponse> create(CreateInstructorRequest createInstructorRequest) {
@@ -37,7 +41,7 @@ public class InstructorManager implements InstructorService {
                 .map(instructorToBeSave, CreateInstructorResponse.class);
         return new
                 SuccessDataResult<CreateInstructorResponse>
-                (response,InstructorMessage.InstructorAdded);
+                (response, InstructorMessage.InstructorAdded);
     }
 
     @Override
@@ -49,7 +53,7 @@ public class InstructorManager implements InstructorService {
                 .map(getInstructor, GetInstructorResponse.class);
         return new
                 SuccessDataResult<GetInstructorResponse>
-                (response,InstructorMessage.InstructorBroughtById);
+                (response, InstructorMessage.InstructorBroughtById);
     }
 
     @Override
@@ -63,17 +67,17 @@ public class InstructorManager implements InstructorService {
                         .collect(Collectors.toList());
         return new
                 SuccessDataResult<List<GetAllnstructorResponse>>
-                (ınstructorResponse,InstructorMessage.InstructorListed);
+                (ınstructorResponse, InstructorMessage.InstructorListed);
     }
 
     @Override
-    public DataResults<InstructorUpdateResponse> update(InstructorUpdateRequest instructorUpdateRequest,int id) {
-        Instructor instructor=instructorRepository.findById(id).orElseThrow(()-> new RuntimeException("Id bulunamadı"));
+    public DataResults<InstructorUpdateResponse> update(InstructorUpdateRequest instructorUpdateRequest, int id) {
+        Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new RuntimeException("Id bulunamadı"));
 
-        Instructor instructorUpdate=modelMapperService.forRequest().map(instructorUpdateRequest,Instructor.class);
+        Instructor instructorUpdate = modelMapperService.forRequest().map(instructorUpdateRequest, Instructor.class);
 
         instructor.setId(id);
-        instructor.setFirstName(instructorUpdate.getFirstName()!=null? instructorUpdate.getFirstName():instructor.getFirstName());
+        instructor.setFirstName(instructorUpdate.getFirstName() != null ? instructorUpdate.getFirstName() : instructor.getFirstName());
         instructor.setLastName(instructorUpdate.getLastName() != null ? instructorUpdate.getLastName() : instructor.getLastName());
         instructor.setUserName(instructorUpdate.getUserName() != null ? instructorUpdate.getUserName() : instructor.getUserName());
         instructor.setNationalIdentity(instructorUpdate.getNationalIdentity() != null ? instructorUpdate.getNationalIdentity() : instructor.getNationalIdentity());
@@ -82,7 +86,15 @@ public class InstructorManager implements InstructorService {
         instructor.setUpdateDate(LocalDateTime.now());
 
         instructorRepository.save(instructorUpdate);
-        InstructorUpdateResponse response=modelMapperService.forResponse().map(instructor,InstructorUpdateResponse.class);
-        return new SuccessDataResult<InstructorUpdateResponse>(response,"InstructorMessage");
+        InstructorUpdateResponse response = modelMapperService.forResponse().map(instructor, InstructorUpdateResponse.class);
+        return new SuccessDataResult<InstructorUpdateResponse>(response, "InstructorMessage");
     }
+
+    @Override
+    public Result deleteInstructorBy(int id) {
+        instructorRepository.findById(id);
+        return new SuccessResult("InstructorDelete");
+    }
+
+
 }

@@ -8,7 +8,6 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -27,5 +26,4 @@ public class BaseEntity<T> {
     private LocalDateTime updateDate;
     @Column(name="DELETE")
     private LocalDateTime deleteDate;
-
 }

@@ -1,31 +1,27 @@
 package com.tobeto.bootcampproject.model.entities;
 
+import com.tobeto.bootcampproject.core.entities.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@PrimaryKeyJoinColumn(name="User_Id")
-@Table(name="INSTRUCTOR")
+@Table(name = "Bootcamp_States")
+public class BootcampState extends BaseEntity<Integer> {
+    @Column(name="name")
+    private String name;
 
-public class Instructor extends User{
-    @Column(name="COMPANY_NAME")
-    private String companyName;
-
-    @OneToMany(mappedBy = "instructor")
+    @OneToMany(mappedBy = "bootcampState")
     private List<Bootcamp> bootcamps;
 }
