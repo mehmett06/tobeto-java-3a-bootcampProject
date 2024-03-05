@@ -2,13 +2,12 @@ package com.tobeto.bootcampproject.business.concretes;
 
 import com.tobeto.bootcampproject.business.abstracts.ApplicationStateService;
 import com.tobeto.bootcampproject.business.request.create.applicationState.CreateApplicationStateRequest;
-import com.tobeto.bootcampproject.business.responses.create.application.CreateApplicationResponse;
 import com.tobeto.bootcampproject.business.responses.create.applicationState.CreateApplicationStateResponse;
+import com.tobeto.bootcampproject.business.responses.get.applicationState.GetApplicationStateResponse;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
 import com.tobeto.bootcampproject.core.utilities.results.Success.SuccessDataResult;
 import com.tobeto.bootcampproject.model.entities.ApplicationState;
-import com.tobeto.bootcampproject.repository.ApplicationRepository;
 import com.tobeto.bootcampproject.repository.ApplicationStateRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,5 +34,18 @@ public class ApplicationStateManager implements ApplicationStateService {
         return new
                 SuccessDataResult<CreateApplicationStateResponse>
                 (response,"ApplicationState Created");
+    }
+
+    @Override
+    public DataResults<GetApplicationStateResponse> getById(int id) {
+        ApplicationState getByIdApplicationState=applicationStateRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Id bulunamadı."));
+
+        GetApplicationStateResponse response = modelMapperService.forResponse()
+                .map(getByIdApplicationState, GetApplicationStateResponse.class);
+
+        return new
+                SuccessDataResult<GetApplicationStateResponse>
+                (response,"ApplicationState Id bulundu");
     }
 }
