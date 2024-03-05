@@ -2,6 +2,7 @@ package com.tobeto.bootcampproject.webApi;
 
 import com.tobeto.bootcampproject.business.abstracts.BootcampStateService;
 import com.tobeto.bootcampproject.business.request.create.bootcampState.CreateBootcampStateRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BootcampStateController extends BaseController{
 private BootcampStateService bootcampStateService;
     @PostMapping
-    public ResponseEntity<?>create(@RequestBody CreateBootcampStateRequest createBootcampStateRequest){
+    public ResponseEntity<?>create(@RequestBody @Valid CreateBootcampStateRequest createBootcampStateRequest){
         return handleDataResult(bootcampStateService.create(createBootcampStateRequest));
     }
     @GetMapping(value="/{id}")

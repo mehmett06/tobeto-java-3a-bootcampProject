@@ -29,4 +29,8 @@ public class ApplicationStateController extends BaseController{
     public ResponseEntity<?>getById(@PathVariable int id){
         return handleDataResult(applicationStateService.getById(id));
     }
+    @GetMapping(value = "/getall")
+    public ResponseEntity<?> getAll() {
+        return handleDataResult(applicationStateService.getAll());
+    }
 }

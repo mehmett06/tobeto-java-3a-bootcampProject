@@ -1,10 +1,8 @@
 package com.tobeto.bootcampproject.business.concretes;
 
 import com.tobeto.bootcampproject.business.abstracts.ApplicationService;
-import com.tobeto.bootcampproject.business.constants.ApplicantMessage;
 import com.tobeto.bootcampproject.business.request.create.application.CreateApplicationRequest;
 import com.tobeto.bootcampproject.business.responses.create.application.CreateApplicationResponse;
-import com.tobeto.bootcampproject.business.responses.get.applicant.GetApplicantResponse;
 import com.tobeto.bootcampproject.business.responses.get.application.GetAllApplicationResponse;
 import com.tobeto.bootcampproject.business.responses.get.application.GetApplicationResponse;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
@@ -15,6 +13,8 @@ import com.tobeto.bootcampproject.repository.ApplicationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -51,5 +51,20 @@ public class ApplicationManager implements ApplicationService {
         return new
                 SuccessDataResult<GetApplicationResponse>
                 (response,"Application Id bulundu");
+    }
+
+    @Override
+    public DataResults<List<GetAllApplicationResponse>>getAll() {
+        List<Application> applications= applicationRepository.findAll();
+    List<GetAllApplicationResponse> allApplicationResponses=
+            applications.stream().map(application -> modelMapperService
+                    .forResponse()
+                    .map(application,GetAllApplicationResponse.class))
+                    .collect(Collectors.toList());
+
+        return new
+                SuccessDataResult<List<GetAllApplicationResponse>>
+                (allApplicationResponses, "Tüm Application Id'ler sıralandı");
+
     }
 }

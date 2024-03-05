@@ -3,6 +3,7 @@ package com.tobeto.bootcampproject.webApi;
 import com.tobeto.bootcampproject.business.abstracts.InstructorService;
 import com.tobeto.bootcampproject.business.request.create.ınstructor.CreateInstructorRequest;
 import com.tobeto.bootcampproject.business.request.update.InstructorUpdateRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +22,7 @@ public class InstructorController extends BaseController {
     private InstructorService instructorService;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody CreateInstructorRequest createInstructorRequest) {
+    public ResponseEntity<?> create(@RequestBody @Valid CreateInstructorRequest createInstructorRequest) {
         return handleDataResult(instructorService.create(createInstructorRequest));
     }
 

@@ -3,6 +3,7 @@ package com.tobeto.bootcampproject.webApi;
 import com.tobeto.bootcampproject.business.abstracts.EmployeeService;
 import com.tobeto.bootcampproject.business.request.create.employee.CreateEmployeeRequest;
 import com.tobeto.bootcampproject.business.request.update.EmployeeUpdateRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +25,7 @@ public class EmployeeController extends BaseController{
     private EmployeeService employeeService;
 
     @PostMapping
-    public ResponseEntity<?>create(@RequestBody CreateEmployeeRequest createEmployeeRequest)
+    public ResponseEntity<?>create(@RequestBody @Valid CreateEmployeeRequest createEmployeeRequest)
     {
         return handleDataResult(employeeService.create(createEmployeeRequest));
     }

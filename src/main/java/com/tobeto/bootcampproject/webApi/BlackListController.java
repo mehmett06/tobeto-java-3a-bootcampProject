@@ -2,6 +2,7 @@ package com.tobeto.bootcampproject.webApi;
 
 import com.tobeto.bootcampproject.business.abstracts.BlacklistService;
 import com.tobeto.bootcampproject.business.request.create.blacklist.CreateBlacklistRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BlackListController extends BaseController{
     private BlacklistService blacklistService;
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody CreateBlacklistRequest blacklistRequest) {
+    public ResponseEntity<?> add(@RequestBody @Valid CreateBlacklistRequest blacklistRequest) {
         return handleDataResult(blacklistService.create(blacklistRequest));
     }
 }

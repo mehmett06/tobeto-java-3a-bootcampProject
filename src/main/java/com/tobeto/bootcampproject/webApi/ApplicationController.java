@@ -2,6 +2,7 @@ package com.tobeto.bootcampproject.webApi;
 
 import com.tobeto.bootcampproject.business.abstracts.ApplicationService;
 import com.tobeto.bootcampproject.business.request.create.application.CreateApplicationRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +20,16 @@ public class ApplicationController extends BaseController{
     private ApplicationService applicationService;
     @PostMapping
     public ResponseEntity<?> create(
-            @RequestBody CreateApplicationRequest createApplicationRequest
+            @RequestBody @Valid CreateApplicationRequest createApplicationRequest
     ){
         return handleDataResult(applicationService.createApplication(createApplicationRequest));
     }
     @GetMapping(value="/{id}")
     public ResponseEntity<?> getById(@PathVariable int id){
         return handleDataResult(applicationService.getById(id));
+    }
+    @GetMapping(value = "/getall")
+    public ResponseEntity<?> getAll() {
+        return handleDataResult(applicationService.getAll());
     }
 }

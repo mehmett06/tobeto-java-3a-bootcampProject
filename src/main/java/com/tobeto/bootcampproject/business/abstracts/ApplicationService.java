@@ -6,8 +6,12 @@ import com.tobeto.bootcampproject.business.responses.get.application.GetAllAppli
 import com.tobeto.bootcampproject.business.responses.get.application.GetApplicationResponse;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
 
+import java.util.List;
+
 public interface ApplicationService {
 DataResults<CreateApplicationResponse> createApplication(CreateApplicationRequest request);
 
 DataResults<GetApplicationResponse>getById(int id);
+
+DataResults<List<GetAllApplicationResponse>>getAll();
 }
