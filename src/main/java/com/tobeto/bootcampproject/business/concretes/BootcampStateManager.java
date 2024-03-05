@@ -17,7 +17,7 @@ public class BootcampStateManager implements BootcampStateService {
     private ModelMapperService modelMapperService;
     private BootcampStateRepository bootcampStateRepository;
     @Override
-    public DataResults<CreateBootcampStateResponse> createBootcampStateResponse(CreateBootcampStateRequest createBootcampStateRequest) {
+    public DataResults<CreateBootcampStateResponse> create(CreateBootcampStateRequest createBootcampStateRequest) {
         BootcampState bootcampStateToCreate=modelMapperService.forRequest()
                 .map(createBootcampStateRequest,BootcampState.class);
 
@@ -25,6 +25,7 @@ public class BootcampStateManager implements BootcampStateService {
 
         CreateBootcampStateResponse response=modelMapperService.forResponse()
                 .map(bootcampStateToCreate,CreateBootcampStateResponse.class);
+
         return new SuccessDataResult<CreateBootcampStateResponse>
                 (response,"BootcampState Created");
     }

@@ -5,5 +5,5 @@ import com.tobeto.bootcampproject.business.responses.create.bootcampState.Create
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
 
 public interface BootcampStateService {
-    DataResults<CreateBootcampStateResponse>createBootcampStateResponse(CreateBootcampStateRequest createBootcampStateRequest);
+    DataResults<CreateBootcampStateResponse>create(CreateBootcampStateRequest createBootcampStateRequest);
 }

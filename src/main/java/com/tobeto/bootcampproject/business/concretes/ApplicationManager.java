@@ -10,7 +10,6 @@ import com.tobeto.bootcampproject.model.entities.Application;
 import com.tobeto.bootcampproject.repository.ApplicationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 
 @Service
@@ -24,7 +23,9 @@ public class ApplicationManager implements ApplicationService {
 
         Application applicationToCreate = modelMapperService.forRequest()
                 .map(request, Application.class);
+
         applicationToCreate.setCreatedDate(LocalDateTime.now());
+
         applicationRepository.save(applicationToCreate);
 
         CreateApplicationResponse response = modelMapperService.forResponse()

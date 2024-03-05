@@ -11,6 +11,5 @@ public class CreateApplicationResponse {
     private int id;
     private int applicantId;
     private int bootcampId;
-    private String firstName;
-    private String about;
+    private int applicationStateId;
 }

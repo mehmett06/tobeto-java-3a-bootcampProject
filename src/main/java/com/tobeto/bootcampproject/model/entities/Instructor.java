@@ -19,11 +19,11 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@PrimaryKeyJoinColumn(name="User_Id")
-@Table(name="INSTRUCTOR")
+@PrimaryKeyJoinColumn(name="user_id")
+@Table(name="instructors")
 
 public class Instructor extends User{
-    @Column(name="COMPANY_NAME")
+    @Column(name="companyName")
     private String companyName;
 
     @OneToMany(mappedBy = "instructor")

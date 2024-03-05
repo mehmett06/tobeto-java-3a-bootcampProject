@@ -13,6 +13,8 @@ import com.tobeto.bootcampproject.repository.ApplicationStateRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @AllArgsConstructor
 public class ApplicationStateManager implements ApplicationStateService {
@@ -20,7 +22,12 @@ public class ApplicationStateManager implements ApplicationStateService {
     private ModelMapperService modelMapperService;
     @Override
     public DataResults<CreateApplicationStateResponse> createApplicationState(CreateApplicationStateRequest createApplicationStateRequest) {
-        ApplicationState applicationState=modelMapperService.forRequest().map(createApplicationStateRequest,ApplicationState.class);
+
+        ApplicationState applicationState=modelMapperService.forRequest()
+                .map(createApplicationStateRequest,ApplicationState.class);
+
+        applicationState.setCreatedDate(LocalDateTime.now());
+
         applicationStateRepository.save(applicationState);
 
         CreateApplicationStateResponse response=modelMapperService.forResponse()

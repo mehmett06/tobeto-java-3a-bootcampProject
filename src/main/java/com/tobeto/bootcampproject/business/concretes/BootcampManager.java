@@ -10,7 +10,6 @@ import com.tobeto.bootcampproject.model.entities.Bootcamp;
 import com.tobeto.bootcampproject.repository.BootcampRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 
 @Service
@@ -20,13 +19,16 @@ public class BootcampManager implements BootcampService {
     private BootcampRepository bootcampRepository;
     @Override
     public DataResults<CreateBootcampResponse> createBootcampResponse(CreateBootcampRequest createBootcampRequest) {
-        Bootcamp bootcampToCreate=modelMapperService.forRequest().map(createBootcampRequest,Bootcamp.class);
+        Bootcamp bootcampToCreate=modelMapperService.forRequest()
+                .map(createBootcampRequest,Bootcamp.class);
+
         bootcampToCreate.setCreatedDate(LocalDateTime.now());
 
         bootcampRepository.save(bootcampToCreate);
 
         CreateBootcampResponse response=modelMapperService.forResponse()
                 .map(bootcampToCreate,CreateBootcampResponse.class);
+
         return new SuccessDataResult<CreateBootcampResponse>
                 (response,"Bootcamp Created");
     }

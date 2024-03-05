@@ -8,31 +8,31 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Bootcamps")
+@Table(name = "bootcamps")
+@EqualsAndHashCode(callSuper = true)
 public class Bootcamp extends BaseEntity<Integer> {
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "start_date")
-    private LocalDateTime startDate;
+    @Column(name = "startDate")
+    private LocalDate startDate;
 
-    @Column(name = "end_date")
-    private LocalDateTime endDate;
+    @Column(name = "endDate")
+    private LocalDate endDate;
 
     @ManyToOne
-    @JoinColumn(name = "bootcamp_state_id")
+    @JoinColumn(name = "bootcampStateId")
     private BootcampState bootcampState;
 
     @ManyToOne
@@ -41,4 +41,5 @@ public class Bootcamp extends BaseEntity<Integer> {
 
     @OneToMany(mappedBy = "bootcamp")
     private List<Application> applications;
+
 }

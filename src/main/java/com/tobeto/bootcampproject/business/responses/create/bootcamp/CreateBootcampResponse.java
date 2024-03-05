@@ -3,17 +3,16 @@ package com.tobeto.bootcampproject.business.responses.create.bootcamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateBootcampResponse {
-
-    private String name;
+    private int id;
     private int instructorId;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private String name;
+    private LocalDate startDate;
+    private LocalDate  endDate;
     private int bootcampStateId;
 }
