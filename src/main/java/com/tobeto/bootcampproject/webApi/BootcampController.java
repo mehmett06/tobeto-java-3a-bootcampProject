@@ -27,6 +27,12 @@ public class BootcampController extends BaseController{
         return handleDataResult(bootcampService.getById(id));
     }
 
+    @GetMapping(value="/getall")
+    public ResponseEntity<?> getByAll(
+    ){
+        return handleDataResult(bootcampService.getByAll());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBootcamp(
             @PathVariable int id

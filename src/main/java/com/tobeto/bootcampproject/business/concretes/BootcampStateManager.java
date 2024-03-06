@@ -3,6 +3,7 @@ package com.tobeto.bootcampproject.business.concretes;
 import com.tobeto.bootcampproject.business.abstracts.BootcampStateService;
 import com.tobeto.bootcampproject.business.request.create.bootcampState.CreateBootcampStateRequest;
 import com.tobeto.bootcampproject.business.responses.create.bootcampState.CreateBootcampStateResponse;
+import com.tobeto.bootcampproject.business.responses.get.bootcampState.GetAllBootcampStateResponse;
 import com.tobeto.bootcampproject.business.responses.get.bootcampState.GetBootcampStateResponse;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
@@ -13,6 +14,9 @@ import com.tobeto.bootcampproject.model.entities.BootcampState;
 import com.tobeto.bootcampproject.repository.BootcampStateRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -42,6 +46,23 @@ public class BootcampStateManager implements BootcampStateService {
                 .map(getByIdBootcampState,GetBootcampStateResponse.class);
         return new SuccessDataResult<GetBootcampStateResponse>
                 (response,"BootcampState Id bulundu");
+
+    }
+
+    @Override
+    public DataResults<List<GetAllBootcampStateResponse>> getByAll() {
+        List<BootcampState> bootcampStates=bootcampStateRepository.findAll();
+
+        List<GetAllBootcampStateResponse>allBootcampStateResponses=
+                bootcampStates.stream().map(bootcampState -> modelMapperService
+                        .forResponse()
+                        .map(bootcampState,GetAllBootcampStateResponse.class))
+                        .collect(Collectors.toList());
+        return new
+                SuccessDataResult<List<GetAllBootcampStateResponse>>
+                (allBootcampStateResponses,"Tüm BootcampState Id'ler sıralandı");
+
+
 
     }
 

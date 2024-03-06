@@ -92,7 +92,7 @@ public class InstructorManager implements InstructorService {
 
     @Override
     public Result deleteInstructorBy(int id) {
-        instructorRepository.findById(id);
+        instructorRepository.deleteById(id);
         return new SuccessResult("InstructorDelete");
     }
 

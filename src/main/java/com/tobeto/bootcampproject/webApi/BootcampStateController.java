@@ -27,6 +27,13 @@ private BootcampStateService bootcampStateService;
         return handleDataResult(bootcampStateService.getById(id));
     }
 
+    @GetMapping(value="/getall")
+    public ResponseEntity<?>getByAll(
+
+    ){
+        return handleDataResult(bootcampStateService.getByAll());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBootcampState(
             @PathVariable int id
