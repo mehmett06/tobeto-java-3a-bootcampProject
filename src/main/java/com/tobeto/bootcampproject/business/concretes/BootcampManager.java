@@ -7,7 +7,9 @@ import com.tobeto.bootcampproject.business.responses.get.application.GetApplicat
 import com.tobeto.bootcampproject.business.responses.get.bootcamp.GetBootcampResponse;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
+import com.tobeto.bootcampproject.core.utilities.results.Result;
 import com.tobeto.bootcampproject.core.utilities.results.Success.SuccessDataResult;
+import com.tobeto.bootcampproject.core.utilities.results.Success.SuccessResult;
 import com.tobeto.bootcampproject.model.entities.Application;
 import com.tobeto.bootcampproject.model.entities.Bootcamp;
 import com.tobeto.bootcampproject.repository.BootcampRepository;
@@ -47,5 +49,11 @@ public class BootcampManager implements BootcampService {
         return new
                 SuccessDataResult<GetBootcampResponse>
                 (response,"Bootcamp Id bulundu");
+    }
+
+    @Override
+    public Result deleteBootcamp(int id) {
+        bootcampRepository.deleteById(id);
+        return new SuccessResult("Bootcamp Delete");
     }
 }

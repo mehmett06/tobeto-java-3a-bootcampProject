@@ -5,6 +5,7 @@ import com.tobeto.bootcampproject.business.responses.create.application.CreateAp
 import com.tobeto.bootcampproject.business.responses.get.application.GetAllApplicationResponse;
 import com.tobeto.bootcampproject.business.responses.get.application.GetApplicationResponse;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
+import com.tobeto.bootcampproject.core.utilities.results.Result;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ DataResults<CreateApplicationResponse> createApplication(CreateApplicationReques
 DataResults<GetApplicationResponse>getById(int id);
 
 DataResults<List<GetAllApplicationResponse>>getAll();
+
+Result deleteApplication(int id);
 }

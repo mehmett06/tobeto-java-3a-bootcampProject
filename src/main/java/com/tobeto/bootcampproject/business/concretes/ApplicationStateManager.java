@@ -9,7 +9,9 @@ import com.tobeto.bootcampproject.business.responses.get.applicationState.GetAll
 import com.tobeto.bootcampproject.business.responses.get.applicationState.GetApplicationStateResponse;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
+import com.tobeto.bootcampproject.core.utilities.results.Result;
 import com.tobeto.bootcampproject.core.utilities.results.Success.SuccessDataResult;
+import com.tobeto.bootcampproject.core.utilities.results.Success.SuccessResult;
 import com.tobeto.bootcampproject.model.entities.Applicant;
 import com.tobeto.bootcampproject.model.entities.ApplicationState;
 import com.tobeto.bootcampproject.repository.ApplicationStateRepository;
@@ -68,5 +70,11 @@ public class ApplicationStateManager implements ApplicationStateService {
         return new
                 SuccessDataResult<List<GetAllApplicationStateResponse>>
                 (applicationStateResponses,"Tüm ApplicationState Id'ler sıralandı");
+    }
+
+    @Override
+    public Result deleteApplicationState(int id) {
+        applicationStateRepository.deleteById(id);
+        return new SuccessResult("ApplicationState Delete");
     }
 }

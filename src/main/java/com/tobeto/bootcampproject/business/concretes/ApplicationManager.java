@@ -7,7 +7,9 @@ import com.tobeto.bootcampproject.business.responses.get.application.GetAllAppli
 import com.tobeto.bootcampproject.business.responses.get.application.GetApplicationResponse;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
+import com.tobeto.bootcampproject.core.utilities.results.Result;
 import com.tobeto.bootcampproject.core.utilities.results.Success.SuccessDataResult;
+import com.tobeto.bootcampproject.core.utilities.results.Success.SuccessResult;
 import com.tobeto.bootcampproject.model.entities.Application;
 import com.tobeto.bootcampproject.repository.ApplicationRepository;
 import lombok.AllArgsConstructor;
@@ -66,5 +68,11 @@ public class ApplicationManager implements ApplicationService {
                 SuccessDataResult<List<GetAllApplicationResponse>>
                 (allApplicationResponses, "Tüm Application Id'ler sıralandı");
 
+    }
+
+    @Override
+    public Result deleteApplication(int id) {
+        applicationRepository.deleteById(id);
+        return new SuccessResult("Application Delete");
     }
 }

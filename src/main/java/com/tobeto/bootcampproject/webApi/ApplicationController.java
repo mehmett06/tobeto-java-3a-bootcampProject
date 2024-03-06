@@ -5,6 +5,7 @@ import com.tobeto.bootcampproject.business.request.create.application.CreateAppl
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,4 +33,12 @@ public class ApplicationController extends BaseController{
     public ResponseEntity<?> getAll() {
         return handleDataResult(applicationService.getAll());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteApplication(
+            @PathVariable int id
+    ){
+        return handleResult(applicationService.deleteApplication(id));
+    }
+
 }

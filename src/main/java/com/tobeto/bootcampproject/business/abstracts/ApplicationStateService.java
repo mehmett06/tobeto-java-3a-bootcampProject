@@ -7,6 +7,7 @@ import com.tobeto.bootcampproject.business.responses.get.application.GetApplicat
 import com.tobeto.bootcampproject.business.responses.get.applicationState.GetAllApplicationStateResponse;
 import com.tobeto.bootcampproject.business.responses.get.applicationState.GetApplicationStateResponse;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
+import com.tobeto.bootcampproject.core.utilities.results.Result;
 
 import java.util.List;
 
@@ -15,5 +16,7 @@ public interface ApplicationStateService {
 
     DataResults<GetApplicationStateResponse> getById(int id);
     DataResults<List<GetAllApplicationStateResponse>> getAll();
+
+    Result deleteApplicationState(int id);
 
 }

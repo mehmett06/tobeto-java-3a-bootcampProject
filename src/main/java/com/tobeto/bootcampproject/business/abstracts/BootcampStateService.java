@@ -4,9 +4,11 @@ import com.tobeto.bootcampproject.business.request.create.bootcampState.CreateBo
 import com.tobeto.bootcampproject.business.responses.create.bootcampState.CreateBootcampStateResponse;
 import com.tobeto.bootcampproject.business.responses.get.bootcampState.GetBootcampStateResponse;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
+import com.tobeto.bootcampproject.core.utilities.results.Result;
 
 public interface BootcampStateService {
     DataResults<CreateBootcampStateResponse>create(CreateBootcampStateRequest createBootcampStateRequest);
 
     DataResults<GetBootcampStateResponse> getById(int id );
+    Result deleteBootcampState(int id);
 }

@@ -4,6 +4,7 @@ import com.tobeto.bootcampproject.business.abstracts.ApplicationStateService;
 import com.tobeto.bootcampproject.business.request.create.applicationState.CreateApplicationStateRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,4 +34,12 @@ public class ApplicationStateController extends BaseController{
     public ResponseEntity<?> getAll() {
         return handleDataResult(applicationStateService.getAll());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteApplicationState(
+            @PathVariable int id
+    ) {
+        return handleResult(applicationStateService.deleteApplicationState(id));
+    }
+
 }

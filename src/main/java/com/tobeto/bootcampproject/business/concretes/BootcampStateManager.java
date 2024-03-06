@@ -6,7 +6,9 @@ import com.tobeto.bootcampproject.business.responses.create.bootcampState.Create
 import com.tobeto.bootcampproject.business.responses.get.bootcampState.GetBootcampStateResponse;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
+import com.tobeto.bootcampproject.core.utilities.results.Result;
 import com.tobeto.bootcampproject.core.utilities.results.Success.SuccessDataResult;
+import com.tobeto.bootcampproject.core.utilities.results.Success.SuccessResult;
 import com.tobeto.bootcampproject.model.entities.BootcampState;
 import com.tobeto.bootcampproject.repository.BootcampStateRepository;
 import lombok.AllArgsConstructor;
@@ -41,5 +43,11 @@ public class BootcampStateManager implements BootcampStateService {
         return new SuccessDataResult<GetBootcampStateResponse>
                 (response,"BootcampState Id bulundu");
 
+    }
+
+    @Override
+    public Result deleteBootcampState(int id) {
+        bootcampStateRepository.deleteById(id);
+        return new SuccessResult("Bootcamp Delete");
     }
 }

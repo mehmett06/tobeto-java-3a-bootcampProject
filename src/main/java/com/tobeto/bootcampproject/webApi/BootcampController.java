@@ -5,6 +5,7 @@ import com.tobeto.bootcampproject.business.request.create.bootcamp.CreateBootcam
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,4 +26,12 @@ public class BootcampController extends BaseController{
     public ResponseEntity<?> getById(@PathVariable int id){
         return handleDataResult(bootcampService.getById(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteBootcamp(
+            @PathVariable int id
+    ) {
+        return handleResult(bootcampService.deleteBootcamp(id));
+    }
+
 }
