@@ -31,7 +31,7 @@ public class CreateApplicantRequest {
     private Date dateOfBirth;
 
     @NotEmpty(message = "National identity can not be empty!")
-    @Size(min = 2, max = 60, message = "National identity must be 11 numbers!")
+    @Size(min = 8, max = 12, message = "National identity must be 11 numbers!")
     private String nationalIdentity;
 
     @NotEmpty(message = "Email can not be empty!")
