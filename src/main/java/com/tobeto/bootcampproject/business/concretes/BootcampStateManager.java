@@ -2,9 +2,11 @@ package com.tobeto.bootcampproject.business.concretes;
 
 import com.tobeto.bootcampproject.business.abstracts.BootcampStateService;
 import com.tobeto.bootcampproject.business.request.create.bootcampState.CreateBootcampStateRequest;
+import com.tobeto.bootcampproject.business.request.update.BootcampStateUpdateRequest;
 import com.tobeto.bootcampproject.business.responses.create.bootcampState.CreateBootcampStateResponse;
 import com.tobeto.bootcampproject.business.responses.get.bootcampState.GetAllBootcampStateResponse;
 import com.tobeto.bootcampproject.business.responses.get.bootcampState.GetBootcampStateResponse;
+import com.tobeto.bootcampproject.business.responses.update.BootcampStateUpdateResponse;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
 import com.tobeto.bootcampproject.core.utilities.results.Result;
@@ -15,6 +17,7 @@ import com.tobeto.bootcampproject.repository.BootcampStateRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,6 +67,24 @@ public class BootcampStateManager implements BootcampStateService {
 
 
 
+    }
+
+    @Override
+    public DataResults<BootcampStateUpdateResponse> updateRequest(BootcampStateUpdateRequest request, int id) {
+        BootcampState bootcampState=bootcampStateRepository.findById(id).orElseThrow(()-> new RuntimeException("Id bulunumadı."));
+
+        BootcampState bootcampStateUpdate=modelMapperService.forRequest()
+                .map(request,BootcampState.class);
+
+        bootcampState.setName(bootcampStateUpdate.getName() != null ? bootcampStateUpdate.getName() : bootcampState.getName());
+        bootcampState.setUpdateDate(LocalDateTime.now());
+        bootcampStateRepository.save(bootcampState);
+
+        BootcampStateUpdateResponse response = modelMapperService.forResponse()
+                .map(bootcampState, BootcampStateUpdateResponse.class);
+
+        return new SuccessDataResult<BootcampStateUpdateResponse>
+                (response, "BootcampState başarıyla değiştirildi.");
     }
 
     @Override

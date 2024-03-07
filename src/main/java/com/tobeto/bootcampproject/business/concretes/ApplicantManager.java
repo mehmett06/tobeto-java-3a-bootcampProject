@@ -91,9 +91,11 @@ public class ApplicantManager implements ApplicantService {
         applicant.setUpdateDate(LocalDateTime.now());
 
         applicantRepository.save(applicantUpdate);
-        ApplicantUpdateResponse applicantUpdateResponse=modelMapperService.forResponse().map(applicant,ApplicantUpdateResponse.class);
+        ApplicantUpdateResponse applicantUpdateResponse=modelMapperService.forResponse()
+                .map(applicant,ApplicantUpdateResponse.class);
 
-        return new SuccessDataResult<ApplicantUpdateResponse>(applicantUpdateResponse,"Applicant Updated");
+        return new SuccessDataResult<ApplicantUpdateResponse>
+                (applicantUpdateResponse,"Applicant Updated");
     }
 
     @Override

@@ -2,12 +2,16 @@ package com.tobeto.bootcampproject.webApi;
 
 import com.tobeto.bootcampproject.business.abstracts.ApplicationStateService;
 import com.tobeto.bootcampproject.business.request.create.applicationState.CreateApplicationStateRequest;
+import com.tobeto.bootcampproject.business.request.update.ApplicationStateUpdateRequest;
+import com.tobeto.bootcampproject.business.request.update.ApplicationUpdateRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +37,14 @@ public class ApplicationStateController extends BaseController{
     @GetMapping(value = "/getall")
     public ResponseEntity<?> getAll() {
         return handleDataResult(applicationStateService.getAll());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?>getUpdate(
+            @PathVariable int id,
+            @RequestBody @Valid ApplicationStateUpdateRequest request
+    ){
+        return handleDataResult(applicationStateService.updateRequest(request,id));
     }
 
     @DeleteMapping("/{id}")

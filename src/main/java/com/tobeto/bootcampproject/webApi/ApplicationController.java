@@ -2,6 +2,7 @@ package com.tobeto.bootcampproject.webApi;
 
 import com.tobeto.bootcampproject.business.abstracts.ApplicationService;
 import com.tobeto.bootcampproject.business.request.create.application.CreateApplicationRequest;
+import com.tobeto.bootcampproject.business.request.update.ApplicationUpdateRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +34,14 @@ public class ApplicationController extends BaseController{
     @GetMapping(value = "/getall")
     public ResponseEntity<?> getAll() {
         return handleDataResult(applicationService.getAll());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?>getUpdate(
+            @PathVariable int id,
+            @RequestBody @Valid ApplicationUpdateRequest request
+            ){
+        return handleDataResult(applicationService.updateRequest(request,id));
     }
 
     @DeleteMapping("/{id}")

@@ -2,11 +2,13 @@ package com.tobeto.bootcampproject.business.concretes;
 
 import com.tobeto.bootcampproject.business.abstracts.BootcampService;
 import com.tobeto.bootcampproject.business.request.create.bootcamp.CreateBootcampRequest;
+import com.tobeto.bootcampproject.business.request.update.BootcampUpdateRequest;
 import com.tobeto.bootcampproject.business.responses.create.bootcamp.CreateBootcampResponse;
 import com.tobeto.bootcampproject.business.responses.get.application.GetApplicationResponse;
 import com.tobeto.bootcampproject.business.responses.get.bootcamp.GetAllBootcampResponse;
 import com.tobeto.bootcampproject.business.responses.get.bootcamp.GetBootcampResponse;
 import com.tobeto.bootcampproject.business.responses.get.bootcampState.GetAllBootcampStateResponse;
+import com.tobeto.bootcampproject.business.responses.update.BootcampUpdateResponse;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
 import com.tobeto.bootcampproject.core.utilities.results.Result;
@@ -28,6 +30,7 @@ public class BootcampManager implements BootcampService {
     private BootcampRepository bootcampRepository;
     @Override
     public DataResults<CreateBootcampResponse> createBootcampResponse(CreateBootcampRequest createBootcampRequest) {
+
         Bootcamp bootcampToCreate=modelMapperService.forRequest()
                 .map(createBootcampRequest,Bootcamp.class);
 
@@ -68,6 +71,29 @@ public class BootcampManager implements BootcampService {
         return new
                 SuccessDataResult<List<GetAllBootcampResponse>>
                 (allBootcampResponses,"Tüm Bootcamp Id'ler sıralandı.");
+
+    }
+
+    @Override
+    public DataResults<BootcampUpdateResponse> updateRequest(BootcampUpdateRequest request, int id) {
+        Bootcamp bootcamp=bootcampRepository.findById(id).orElseThrow(()-> new RuntimeException("Id bulunumadı."));
+
+        Bootcamp bootcampUpdate=modelMapperService.forRequest()
+                .map(request,Bootcamp.class);
+
+        bootcamp.setName(bootcampUpdate.getName() != null ? bootcampUpdate.getName() : bootcamp.getName());
+        bootcamp.setInstructor(bootcampUpdate.getInstructor() != null ? bootcampUpdate.getInstructor() : bootcamp.getInstructor());
+        bootcamp.setStartDate(bootcampUpdate.getStartDate() != null ? bootcampUpdate.getStartDate() : bootcamp.getStartDate());
+        bootcamp.setEndDate(bootcampUpdate.getEndDate() != null ? bootcampUpdate.getEndDate() : bootcamp.getEndDate());
+        bootcamp.setBootcampState(bootcampUpdate.getBootcampState() != null ? bootcampUpdate.getBootcampState() : bootcamp.getBootcampState());
+        bootcamp.setUpdateDate(LocalDateTime.now());
+        bootcampRepository.save(bootcamp);
+
+        BootcampUpdateResponse response = modelMapperService.forResponse()
+                .map(bootcamp, BootcampUpdateResponse.class);
+
+        return new SuccessDataResult<BootcampUpdateResponse>
+                (response, "Bootcamp başarıyla değiştirildi.");
 
     }
 

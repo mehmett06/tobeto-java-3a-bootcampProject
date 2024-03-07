@@ -2,9 +2,11 @@ package com.tobeto.bootcampproject.business.concretes;
 
 import com.tobeto.bootcampproject.business.abstracts.ApplicationService;
 import com.tobeto.bootcampproject.business.request.create.application.CreateApplicationRequest;
+import com.tobeto.bootcampproject.business.request.update.ApplicationUpdateRequest;
 import com.tobeto.bootcampproject.business.responses.create.application.CreateApplicationResponse;
 import com.tobeto.bootcampproject.business.responses.get.application.GetAllApplicationResponse;
 import com.tobeto.bootcampproject.business.responses.get.application.GetApplicationResponse;
+import com.tobeto.bootcampproject.business.responses.update.ApplicationUpdateResponse;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
 import com.tobeto.bootcampproject.core.utilities.results.Result;
@@ -67,6 +69,27 @@ public class ApplicationManager implements ApplicationService {
         return new
                 SuccessDataResult<List<GetAllApplicationResponse>>
                 (allApplicationResponses, "Tüm Application Id'ler sıralandı");
+
+    }
+
+    @Override
+    public DataResults<ApplicationUpdateResponse> updateRequest(ApplicationUpdateRequest applicationUpdateRequest,int id
+    ) {
+        Application application=applicationRepository.findById(id).orElseThrow(()-> new RuntimeException("Id bulunumadı."));
+
+        Application applicationUpdate=modelMapperService.forRequest().map(applicationUpdateRequest,Application.class);
+
+        application.setApplicant(applicationUpdate.getApplicant() != null ? applicationUpdate.getApplicant() : application.getApplicant());
+        application.setBootcamp(applicationUpdate.getBootcamp() != null ? applicationUpdate.getBootcamp() : application.getBootcamp());
+        application.setApplicationState(applicationUpdate.getApplicationState() != null ? applicationUpdate.getApplicationState() : application.getApplicationState());
+        application.setUpdateDate(LocalDateTime.now());
+        applicationRepository.save(application);
+
+        ApplicationUpdateResponse response = modelMapperService.forResponse()
+                .map(application, ApplicationUpdateResponse.class);
+
+        return new SuccessDataResult<ApplicationUpdateResponse>
+                (response, "Application başarıyla değiştirildi.");
 
     }
 
