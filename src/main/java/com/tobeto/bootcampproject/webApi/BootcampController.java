@@ -4,6 +4,7 @@ import com.tobeto.bootcampproject.business.abstracts.BootcampService;
 import com.tobeto.bootcampproject.business.request.create.bootcamp.CreateBootcampRequest;
 import com.tobeto.bootcampproject.business.request.update.ApplicationUpdateRequest;
 import com.tobeto.bootcampproject.business.request.update.BootcampUpdateRequest;
+import com.tobeto.bootcampproject.core.aspects.logging.Loggable;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,30 +20,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/bootcamp")
 @AllArgsConstructor
-public class BootcampController extends BaseController{
+public class BootcampController extends BaseController {
     private BootcampService bootcampService;
+
+    @Loggable
     @PostMapping
-    public ResponseEntity<?>create(@RequestBody @Valid CreateBootcampRequest createBootcampRequest){
+    public ResponseEntity<?> create(@RequestBody @Valid CreateBootcampRequest createBootcampRequest) {
         return handleDataResult(bootcampService.createBootcampResponse(createBootcampRequest));
     }
-    @GetMapping(value="/{id}")
-    public ResponseEntity<?> getById(@PathVariable int id){
+
+    @Loggable
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable int id) {
         return handleDataResult(bootcampService.getById(id));
     }
 
-    @GetMapping(value="/getall")
+    @Loggable
+    @GetMapping(value = "/getall")
     public ResponseEntity<?> getByAll(
-    ){
+    ) {
         return handleDataResult(bootcampService.getByAll());
     }
 
+    @Loggable
     @PutMapping("/{id}")
-    public ResponseEntity<?>getUpdate(
+    public ResponseEntity<?> getUpdate(
             @PathVariable int id,
             @RequestBody @Valid BootcampUpdateRequest request
-    ){
-        return handleDataResult(bootcampService.updateRequest(request,id));
+    ) {
+        return handleDataResult(bootcampService.updateRequest(request, id));
     }
+
+    @Loggable
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBootcamp(
             @PathVariable int id

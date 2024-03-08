@@ -3,6 +3,7 @@ package com.tobeto.bootcampproject.webApi;
 import com.tobeto.bootcampproject.business.abstracts.ApplicationService;
 import com.tobeto.bootcampproject.business.request.create.application.CreateApplicationRequest;
 import com.tobeto.bootcampproject.business.request.update.ApplicationUpdateRequest;
+import com.tobeto.bootcampproject.core.aspects.logging.Loggable;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,36 +19,44 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/applications")
 @AllArgsConstructor
-public class ApplicationController extends BaseController{
+public class ApplicationController extends BaseController {
 
     private ApplicationService applicationService;
+
+    @Loggable
     @PostMapping
     public ResponseEntity<?> create(
             @RequestBody @Valid CreateApplicationRequest createApplicationRequest
-    ){
+    ) {
         return handleDataResult(applicationService.createApplication(createApplicationRequest));
     }
-    @GetMapping(value="/{id}")
-    public ResponseEntity<?> getById(@PathVariable int id){
+
+    @Loggable
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable int id) {
         return handleDataResult(applicationService.getById(id));
     }
+
+    @Loggable
     @GetMapping(value = "/getall")
     public ResponseEntity<?> getAll() {
         return handleDataResult(applicationService.getAll());
     }
 
+    @Loggable
     @PutMapping("/{id}")
-    public ResponseEntity<?>getUpdate(
+    public ResponseEntity<?> getUpdate(
             @PathVariable int id,
             @RequestBody @Valid ApplicationUpdateRequest request
-            ){
-        return handleDataResult(applicationService.updateRequest(request,id));
+    ) {
+        return handleDataResult(applicationService.updateRequest(request, id));
     }
 
+    @Loggable
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteApplication(
             @PathVariable int id
-    ){
+    ) {
         return handleResult(applicationService.deleteApplication(id));
     }
 

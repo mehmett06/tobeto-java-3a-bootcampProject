@@ -8,6 +8,7 @@ import com.tobeto.bootcampproject.business.responses.create.applicant.CreateAppl
 import com.tobeto.bootcampproject.business.responses.get.applicant.GetAllAppllicantResponse;
 import com.tobeto.bootcampproject.business.responses.get.applicant.GetApplicantResponse;
 import com.tobeto.bootcampproject.business.responses.update.ApplicantUpdateResponse;
+import com.tobeto.bootcampproject.business.rules.UserBusinessRules;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
 import com.tobeto.bootcampproject.core.utilities.results.Result;
@@ -27,10 +28,15 @@ import java.util.stream.Collectors;
 public class ApplicantManager implements ApplicantService {
     private ApplicantRepository applicantRepository;
     private ModelMapperService modelMapperService;
+    private UserBusinessRules userBusinessRules;
 
 
     @Override
     public DataResults<CreateApplicantResponse> create(CreateApplicantRequest createApplicantRequest) {
+        userBusinessRules.checkIfEmailExist(createApplicantRequest.getEmail());
+        userBusinessRules.checkIfUserNameExist(createApplicantRequest.getUserName());
+        userBusinessRules.checkIfNationalIdentıtyExist(createApplicantRequest.getNationalIdentity());
+
         Applicant applicantToCreate = modelMapperService.forRequest()
                 .map(createApplicantRequest, Applicant.class);
         applicantToCreate.setCreatedDate(LocalDateTime.now());

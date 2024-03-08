@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -18,10 +18,10 @@ public class CreateBootcampRequest {
     private int instructorId;
 
     @NotNull(message = "Start Date must not be null!")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @NotNull(message = "End Date must not be null!")
-    private  LocalDateTime endDate;
+    private  LocalDate endDate;
 
     @NotNull(message = "Bootcamp State Id must not be null!")
     private int bootcampStateId;

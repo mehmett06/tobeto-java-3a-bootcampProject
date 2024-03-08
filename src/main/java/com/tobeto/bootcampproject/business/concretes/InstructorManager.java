@@ -8,6 +8,7 @@ import com.tobeto.bootcampproject.business.responses.create.ınstructor.CreateIn
 import com.tobeto.bootcampproject.business.responses.get.ınstructor.GetAllnstructorResponse;
 import com.tobeto.bootcampproject.business.responses.get.ınstructor.GetInstructorResponse;
 import com.tobeto.bootcampproject.business.responses.update.InstructorUpdateResponse;
+import com.tobeto.bootcampproject.business.rules.UserBusinessRules;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
 import com.tobeto.bootcampproject.core.utilities.results.Result;
@@ -29,9 +30,14 @@ public class InstructorManager implements InstructorService {
     private InstructorRepository instructorRepository;
     private ModelMapperService modelMapperService;
     private final EmployeeRepository employeeRepository;
+    private UserBusinessRules userBusinessRules;
 
     @Override
     public DataResults<CreateInstructorResponse> create(CreateInstructorRequest createInstructorRequest) {
+        userBusinessRules.checkIfEmailExist(createInstructorRequest.getEmail());
+        userBusinessRules.checkIfUserNameExist(createInstructorRequest.getUserName());
+        userBusinessRules.checkIfNationalIdentıtyExist(createInstructorRequest.getNationalIdentity());
+
         Instructor instructorToBeSave = modelMapperService.forRequest()
                 .map(createInstructorRequest, Instructor.class);
         instructorToBeSave.setCreatedDate(LocalDateTime.now());

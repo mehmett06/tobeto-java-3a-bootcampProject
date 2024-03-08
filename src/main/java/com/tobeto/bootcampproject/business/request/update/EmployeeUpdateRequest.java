@@ -3,49 +3,46 @@ package com.tobeto.bootcampproject.business.request.update;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeUpdateRequest {
-    @NotEmpty(message = "First name can not be empty!")
-    @Size(min = 2, max = 60, message = "First name must be at least 2 characters!")
+
+    @NotEmpty(message = "First name must not be empty!")
+    @Size(min = 2, max = 50, message = "First name must be at least 2 characters!")
     private String firstName;
 
-    @NotEmpty(message = "Last name can not be empty!")
-    @Size(min = 2, max = 60, message = "Last name must be at least 2 characters!")
+    @NotEmpty(message = "Last name must not be empty!")
+    @Size(min = 2, max = 50, message = "Last name must be at least 2 characters!")
     private String lastName;
 
-    @NotEmpty(message = "Username can not be empty!")
-    @Size(min = 2, max = 30, message = "User name must be at least 2 characters!")
-    private String userName;
-
-    @NotEmpty(message = "Email can not be empty!")
-    @Email(message = "Enter a valid email format!")
+    @NotEmpty(message = "Email must not be empty!")
+    @Email(message = "Invalid email address!")
     private String email;
 
-    @NotEmpty(message = "Password can not be empty!")
-    @Size(min = 8, max = 15, message = "Password must be between 8 and 15 characters.")
+    @NotEmpty(message = "Password must not be empty!")
+    @Size(min = 5, max = 30, message = "Password must be between 5 and 25 characters!")
     private String password;
 
-    @NotEmpty(message = "National identity can not be empty!")
-    @Size(min = 11, max = 11, message = "National identity must be 11 numbers!")
+    @NotEmpty(message = "User name must not be empty!")
+    @Size(min = 2, max = 50, message = "User name must be at least 2 characters!")
+    private String userName;
+
+    @Size(min = 11, max = 11, message = "National identity must be exactly 11 characters.")
     private String nationalIdentity;
 
-    @Past(message = "Date of birth must be int the past!")
-    @NotNull(message = "Date of birth can not be null!")
-    private LocalDate dateOfBirth;
+    @NotNull(message = "Date of birth must not be null.")
+    @PastOrPresent(message = "Date of birth must be in the past or present.")
+    private Date dateOfBirth;
 
-    @NotEmpty(message = "Position can not be empty!")
-    @Size(min = 2, max = 60, message = "Position must be at least 2 characters!")
+    @NotEmpty(message = "Position must not be empty!")
     private String position;
+
 }

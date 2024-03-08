@@ -13,8 +13,9 @@ public class BaseController {
 
         return ResponseEntity.badRequest().body(dataResults);
     }
-    public ResponseEntity<?> handleResult(Result result){
-        if(result.isSuccess()){
+
+    public ResponseEntity<?> handleResult(Result result) {
+        if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }
         return ResponseEntity.badRequest().body(result);

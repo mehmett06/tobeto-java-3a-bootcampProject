@@ -4,6 +4,7 @@ import com.tobeto.bootcampproject.business.abstracts.ApplicationStateService;
 import com.tobeto.bootcampproject.business.request.create.applicationState.CreateApplicationStateRequest;
 import com.tobeto.bootcampproject.business.request.update.ApplicationStateUpdateRequest;
 import com.tobeto.bootcampproject.business.request.update.ApplicationUpdateRequest;
+import com.tobeto.bootcampproject.core.aspects.logging.Loggable;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,34 +20,41 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/applicationstate")
 @AllArgsConstructor
-public class ApplicationStateController extends BaseController{
+public class ApplicationStateController extends BaseController {
 
     private ApplicationStateService applicationStateService;
+
+    @Loggable
     @PostMapping
-    public ResponseEntity<?>create(
+    public ResponseEntity<?> create(
             @RequestBody CreateApplicationStateRequest createApplicationStateRequest
-    ){
+    ) {
 
         return handleDataResult(applicationStateService.createApplicationState(createApplicationStateRequest));
     }
 
-    @GetMapping(value="{id}")
-    public ResponseEntity<?>getById(@PathVariable int id){
+    @Loggable
+    @GetMapping(value = "{id}")
+    public ResponseEntity<?> getById(@PathVariable int id) {
         return handleDataResult(applicationStateService.getById(id));
     }
+
+    @Loggable
     @GetMapping(value = "/getall")
     public ResponseEntity<?> getAll() {
         return handleDataResult(applicationStateService.getAll());
     }
 
+    @Loggable
     @PutMapping("/{id}")
-    public ResponseEntity<?>getUpdate(
+    public ResponseEntity<?> getUpdate(
             @PathVariable int id,
             @RequestBody @Valid ApplicationStateUpdateRequest request
-    ){
-        return handleDataResult(applicationStateService.updateRequest(request,id));
+    ) {
+        return handleDataResult(applicationStateService.updateRequest(request, id));
     }
 
+    @Loggable
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteApplicationState(
             @PathVariable int id

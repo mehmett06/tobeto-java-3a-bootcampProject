@@ -8,9 +8,14 @@ import com.tobeto.bootcampproject.core.utilities.results.DataResults;
 import com.tobeto.bootcampproject.core.utilities.results.Success.SuccessDataResult;
 import com.tobeto.bootcampproject.model.entities.User;
 import com.tobeto.bootcampproject.repository.UserRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
+@AllArgsConstructor
 public class UserManager implements UserService {
     private UserRepository userRepository;
     private ModelMapperService mapperService;

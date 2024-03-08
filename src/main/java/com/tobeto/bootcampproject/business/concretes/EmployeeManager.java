@@ -8,6 +8,7 @@ import com.tobeto.bootcampproject.business.responses.create.employee.CreateEmplo
 import com.tobeto.bootcampproject.business.responses.get.employee.GetAllEmployeeResponse;
 import com.tobeto.bootcampproject.business.responses.get.employee.GetEmployeeResponse;
 import com.tobeto.bootcampproject.business.responses.update.EmployeeUpdateResponse;
+import com.tobeto.bootcampproject.business.rules.UserBusinessRules;
 import com.tobeto.bootcampproject.core.utilities.mapper.ModelMapperService;
 import com.tobeto.bootcampproject.core.utilities.results.DataResults;
 import com.tobeto.bootcampproject.core.utilities.results.Result;
@@ -26,9 +27,14 @@ import java.util.stream.Collectors;
 public class EmployeeManager implements EmployeeService {
     private EmployeeRepository employeeRepository;
     private ModelMapperService modelMapperService;
+    private UserBusinessRules userBusinessRules;
 
     @Override
     public DataResults<CreateEmployeeResponse> create(CreateEmployeeRequest createEmployeeRequest) {
+        userBusinessRules.checkIfEmailExist(createEmployeeRequest.getEmail());
+        userBusinessRules.checkIfUserNameExist(createEmployeeRequest.getUserName());
+        userBusinessRules.checkIfNationalIdentıtyExist(createEmployeeRequest.getNationalIdentity());
+
         Employee employeeToCreate = modelMapperService.forRequest()
                 .map(createEmployeeRequest, Employee.class);
         employeeToCreate.setCreatedDate(LocalDateTime.now());

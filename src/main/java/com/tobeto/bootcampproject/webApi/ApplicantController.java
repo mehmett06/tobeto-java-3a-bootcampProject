@@ -3,6 +3,7 @@ package com.tobeto.bootcampproject.webApi;
 import com.tobeto.bootcampproject.business.abstracts.ApplicantService;
 import com.tobeto.bootcampproject.business.request.create.applicant.CreateApplicantRequest;
 import com.tobeto.bootcampproject.business.request.update.ApplicantUpdateRequest;
+import com.tobeto.bootcampproject.core.aspects.logging.Loggable;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,22 +22,25 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApplicantController extends BaseController {
     private ApplicantService applicantService;
 
+    @Loggable
     @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid CreateApplicantRequest createApplicantRequest) {
         return handleDataResult(applicantService.create(createApplicantRequest));
     }
 
+    @Loggable
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> getById(@PathVariable int id) {
         return handleDataResult(applicantService.getById(id));
     }
 
-
+    @Loggable
     @GetMapping(value = "/getall")
     public ResponseEntity<?> getAll() {
         return handleDataResult(applicantService.getAll());
     }
 
+    @Loggable
     @PutMapping("/{id}")
     public ResponseEntity<?> getUpdate(
             @PathVariable int id,
@@ -45,6 +49,7 @@ public class ApplicantController extends BaseController {
         return handleDataResult(applicantService.updateRequest(request, id));
     }
 
+    @Loggable
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteApplicant(
             @PathVariable int id

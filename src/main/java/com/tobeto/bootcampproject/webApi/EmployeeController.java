@@ -3,6 +3,7 @@ package com.tobeto.bootcampproject.webApi;
 import com.tobeto.bootcampproject.business.abstracts.EmployeeService;
 import com.tobeto.bootcampproject.business.request.create.employee.CreateEmployeeRequest;
 import com.tobeto.bootcampproject.business.request.update.EmployeeUpdateRequest;
+import com.tobeto.bootcampproject.core.aspects.logging.Loggable;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,43 +17,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
 @RestController
 @RequestMapping("/api/employees")
 @AllArgsConstructor
-public class EmployeeController extends BaseController{
+public class EmployeeController extends BaseController {
 
     private EmployeeService employeeService;
 
+    @Loggable
     @PostMapping
-    public ResponseEntity<?>create(@RequestBody @Valid CreateEmployeeRequest createEmployeeRequest)
-    {
+    public ResponseEntity<?> create(@RequestBody @Valid CreateEmployeeRequest createEmployeeRequest) {
         return handleDataResult(employeeService.create(createEmployeeRequest));
     }
 
-
+    @Loggable
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?>getById(@PathVariable int id){
+    public ResponseEntity<?> getById(@PathVariable int id) {
         return handleDataResult(employeeService.getById(id));
     }
 
+    @Loggable
     @GetMapping(value = "/getall")
-    public ResponseEntity<?>getAll(){
+    public ResponseEntity<?> getAll() {
         return handleDataResult(employeeService.getAll());
     }
 
+    @Loggable
     @PutMapping("/{id}")
-    public ResponseEntity<?>getUpdate(
+    public ResponseEntity<?> getUpdate(
             @PathVariable int id,
             @RequestBody EmployeeUpdateRequest request
-    ){
-        return handleDataResult(employeeService.update(request,id));
+    ) {
+        return handleDataResult(employeeService.update(request, id));
     }
 
+    @Loggable
     @DeleteMapping("/{id}")
-    public ResponseEntity<?>delete(
+    public ResponseEntity<?> delete(
             @PathVariable int id
-    ){
+    ) {
         return handleResult(employeeService.deleteEmployeeBy(id));
     }
 }
